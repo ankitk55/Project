@@ -22,4 +22,8 @@ public class UrlHitController {
         return urlHitService.count();
     }
 
+    @GetMapping("username/{username}/count")
+    public Model count(@PathVariable String username){
+        return urlHitService.getcounter(username);
+    }
 }

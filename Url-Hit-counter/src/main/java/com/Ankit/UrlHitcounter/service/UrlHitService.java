@@ -12,12 +12,23 @@ public class UrlHitService {
     @Autowired
     Model model;
 
-
+    private Integer count =0;
     private Integer countt =0;
 
   public String count(){
       countt++;
       return "Visitors : "+countt;
   }
+
+    public Model getcounter(String username){
+
+        count++;
+        model.setUsername(username);
+
+        model.setHit(count);
+
+
+        return model ;
+    }
 
 }
