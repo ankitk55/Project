@@ -1,13 +1,13 @@
-package com.Ankit.UserManagementSystem;
+package com.Ankit.Simple.Restaurant.Application;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserManagementSystemApplication {
+public class SimpleRestaurantApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserManagementSystemApplication.class, args);
+		SpringApplication.run(SimpleRestaurantApplication.class, args);
 	}
-}
 
+}
