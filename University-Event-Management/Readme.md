@@ -33,7 +33,7 @@
         Event 
 ## Validation Rules
 - Student first name of first letter should be capital letter
-- Student age shoulb be beetween 18-25 .
+- Student age should be beetween 18-25 .
     
 ##  Summary
 The University Event Management System is designed to facilitate event organization and management within a university setting. It allows students to register for events, view event details. The system also provides event organizers with the necessary tools to create events , modify events, and delete events.
