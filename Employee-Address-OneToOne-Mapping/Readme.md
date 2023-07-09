@@ -48,7 +48,8 @@ Employee Endpoints:
 - GET /employees/{id}: Retrieve an employee by ID.
 - POST /employees: Create a new employee.
 - PUT /employees/{id}: Update an existing employee.
-- DELETE /employees/{id}: Delete an employee.
+- DELETE /employees/{id}: Delete an employee.\
+  
  Address Endpoints:
 
 - GET /addresses: Retrieve all addresses.
