@@ -1,6 +1,8 @@
 package com.Ankit.Simple.Restaurant.Application.model;
 
 import com.Ankit.Simple.Restaurant.Application.model.categeory.Categeory;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Restaurant {
+    @NotNull
     private Integer restaurantId;
+    @NotBlank
     private String restaurantName;
     private String restaurantAddress;
     private String restaurantPhone;
