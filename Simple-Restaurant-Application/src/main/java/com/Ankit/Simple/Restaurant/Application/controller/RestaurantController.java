@@ -4,11 +4,13 @@ import com.Ankit.Simple.Restaurant.Application.model.Menu;
 import com.Ankit.Simple.Restaurant.Application.model.Restaurant;
 import com.Ankit.Simple.Restaurant.Application.model.categeory.Categeory;
 import com.Ankit.Simple.Restaurant.Application.service.RestaurantService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Validated
 @RestController
 public class RestaurantController {
     @Autowired
@@ -24,7 +26,7 @@ public class RestaurantController {
         return restaurantService.getRestaurantById(id);
     }
     @PostMapping("Restaurant")
-    public String addRestaurant(@RequestBody Restaurant restaurant){
+    public String addRestaurant(@RequestBody @Valid Restaurant restaurant){
         return restaurantService.addRestaurent(restaurant);
     }
     @PutMapping("Restaurant/menu/id/{id}")
