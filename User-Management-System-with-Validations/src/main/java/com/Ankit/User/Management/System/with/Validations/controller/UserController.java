@@ -32,7 +32,7 @@ public class UserController {
         return userService.getUserById(id);
     }
     @PostMapping("addUser")
-    public String addUser(@Valid @RequestBody User user){
+    public String addUser( @RequestBody @Valid User user){
         return userService.addUser(user);
     }
     @PutMapping("user/userName/id/{id}/userName/{userName}")
