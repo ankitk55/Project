@@ -12,6 +12,5 @@ public class SignInInput {
 
     @Pattern(regexp = "^[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.com$")
     private String email;
-    @Pattern(regexp = "\\d{10}")
     private String password;
 }

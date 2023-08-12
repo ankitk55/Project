@@ -1,5 +1,6 @@
 package com.Ankit.InstagramBackendBasicDesign.model;
 
+import com.Ankit.InstagramBackendBasicDesign.model.enums.AccountType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Pattern;
@@ -29,5 +30,11 @@ public class User {
     private String userPassword;
     @Pattern(regexp = "\\d{10}")
     private String userPhoneNumber;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private int follower=0;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private int following=0;
+
+    private AccountType accountType;
 
 }

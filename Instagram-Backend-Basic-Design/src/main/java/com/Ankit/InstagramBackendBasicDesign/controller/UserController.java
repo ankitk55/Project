@@ -1,12 +1,15 @@
 package com.Ankit.InstagramBackendBasicDesign.controller;
 
+import com.Ankit.InstagramBackendBasicDesign.model.Follow;
 import com.Ankit.InstagramBackendBasicDesign.model.Post;
 import com.Ankit.InstagramBackendBasicDesign.model.User;
 import com.Ankit.InstagramBackendBasicDesign.model.dto.SignInInput;
 import com.Ankit.InstagramBackendBasicDesign.model.dto.SignUpOutput;
+import com.Ankit.InstagramBackendBasicDesign.model.enums.AccountType;
 import com.Ankit.InstagramBackendBasicDesign.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -59,7 +62,7 @@ public class UserController {
         return userService.editPost(postId,email,token,newPostData);
     }
 
-    @GetMapping("posts")
+    @GetMapping("my/posts")
     public List<Post> getAllPost(@RequestParam @Valid String email, @RequestParam String token){
         return userService.getAllPost(email,token);
     }
@@ -74,7 +77,41 @@ public class UserController {
 
             return userService.deleteUserAccount(email,token);
     }
-
-
+@PostMapping("follow/{userId}")
+    public String follow(@RequestParam @Valid String email,@RequestParam String token,@PathVariable Long userId){
+        return userService.follow(email,token,userId);
+}
+@DeleteMapping("unfollow/{userId}")
+    public String unfollowByUserId(@RequestParam @Valid String email,@RequestParam String token,@PathVariable Long userId){
+        return userService.unfollowByUserId(email,token,userId);
+}
+@GetMapping("followers/{userId}")
+    public ResponseEntity<List<User>>getAllFollowersById(@RequestParam @Valid String email,@RequestParam String token,@PathVariable Long userId){
+        return userService.getAllFollowersById(email,token,userId);
+}
+@GetMapping("followings/{userId}")
+    public ResponseEntity<List<User>>getFollowingsById(@RequestParam @Valid String email,@RequestParam String token,@PathVariable Long userId){
+        return userService.getFollowingsById(email,token,userId);
+}
+@GetMapping("profile/{userId}")
+    public ResponseEntity<User> getProfileById(@RequestParam @Valid String email,@RequestParam String token,@PathVariable Long userId){
+        return userService.getProfileById(email,token,userId);
+}
+@GetMapping("all/requests")
+    public ResponseEntity<List<User>> getAllRequests(@RequestParam @Valid String email,@RequestParam String token){
+        return userService.getAllRequests(email,token);
+}
+@PutMapping("follow/request/accept/{userId}")
+    public String requestAcceptByUserId(@RequestParam @Valid String email,@RequestParam String token,@PathVariable Long userId){
+        return userService.requestAcceptByUserId(email,token,userId);
+}
+@DeleteMapping("follow/request/{userId}")
+    public String deleteFollowRequests(@RequestParam @Valid String email,@RequestParam String token,@PathVariable Long userId){
+        return userService.deleteFollowRequest(email,token,userId);
+}
+@PutMapping("account/type/{accountType}")
+    public String updateAccountType(@RequestParam @Valid String email, @RequestParam String token, @PathVariable AccountType accountType){
+        return userService.updateAccountType(email,token,accountType);
+}
 
 }
