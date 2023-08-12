@@ -6,6 +6,8 @@ import com.Ankit.InstagramBackendBasicDesign.model.Post;
 import com.Ankit.InstagramBackendBasicDesign.model.User;
 import com.Ankit.InstagramBackendBasicDesign.model.dto.SignInInput;
 import com.Ankit.InstagramBackendBasicDesign.model.dto.SignUpOutput;
+import com.Ankit.InstagramBackendBasicDesign.model.dto.commentDto.AddCommentDto;
+import com.Ankit.InstagramBackendBasicDesign.model.dto.commentDto.GetCommentDto;
 import com.Ankit.InstagramBackendBasicDesign.model.enums.AccountType;
 import com.Ankit.InstagramBackendBasicDesign.repository.IUserRpo;
 import com.Ankit.InstagramBackendBasicDesign.service.utility.emailUtility.EmailHandler;
@@ -35,6 +37,8 @@ public class UserService {
     FollowService followService;
     @Autowired
     FollowRequestService followRequestService;
+    @Autowired
+    CommentService commentService;
     public SignUpOutput signUpUser(User user) {
 
         boolean signUpStatus = true;
@@ -364,6 +368,40 @@ public class UserService {
             myself.setAccountType(accountType);
             userRepo.save(myself);
             return "your account successfully set as "+accountType;
+        }
+        return "invalid credentials";
+    }
+
+    public String postComment(String email, String token, AddCommentDto addCommentDto, Long postId) {
+        if(authenticationService.authenticate(email,token)){
+            User myself = userRepo.findFirstByUserEmail(email);
+            Post post = postService.getPostById(postId);
+            if(post ==null){
+                return "invalid post id..";
+            }
+            User postUser = post.getUser();
+            if(postUser.getAccountType().toString().equals("PRIVATE")){
+                List<Follow>followList = followService.followRepo.findByFollowedToAndWantToFollow(postUser,myself);
+                return (followList.size()>0?commentService.postComment(addCommentDto,myself,post):"you can't comment this post this account is private;");
+            }
+            return commentService.postComment(addCommentDto,myself,post);
+
+        }
+        return "invalid credentials";
+    }
+
+    public ResponseEntity<List<GetCommentDto>> allCommentsByPostId(String email, String token, Long postId) {
+        if(authenticationService.authenticate(email,token)){
+            User myself = userRepo.findFirstByUserEmail(email);
+           return commentService.allCommentsByPostId(myself,postId);
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    }
+
+    public String deleteCommentById(String email, String token, Long commentId) {
+        if (authenticationService.authenticate(email, token)) {
+            User myself = userRepo.findFirstByUserEmail(email);
+            return commentService.deleteCommentById(myself,commentId);
         }
         return "invalid credentials";
     }

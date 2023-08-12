@@ -66,4 +66,8 @@ public class PostService {
         iPostRepo.deleteAllById(postIds);
 
     }
+
+    public Post getPostById(Long postId) {
+       return iPostRepo.findById(postId).orElse(null);
+    }
 }

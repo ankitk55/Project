@@ -5,6 +5,8 @@ import com.Ankit.InstagramBackendBasicDesign.model.Post;
 import com.Ankit.InstagramBackendBasicDesign.model.User;
 import com.Ankit.InstagramBackendBasicDesign.model.dto.SignInInput;
 import com.Ankit.InstagramBackendBasicDesign.model.dto.SignUpOutput;
+import com.Ankit.InstagramBackendBasicDesign.model.dto.commentDto.AddCommentDto;
+import com.Ankit.InstagramBackendBasicDesign.model.dto.commentDto.GetCommentDto;
 import com.Ankit.InstagramBackendBasicDesign.model.enums.AccountType;
 import com.Ankit.InstagramBackendBasicDesign.service.UserService;
 import jakarta.validation.Valid;
@@ -113,5 +115,17 @@ public class UserController {
     public String updateAccountType(@RequestParam @Valid String email, @RequestParam String token, @PathVariable AccountType accountType){
         return userService.updateAccountType(email,token,accountType);
 }
+    @DeleteMapping("comment/{commentId}")
+    public String deleteCommentById(@RequestParam @Valid String email, @RequestParam String token, @PathVariable Long commentId){
+        return userService.deleteCommentById(email,token,commentId);
+    }
+    @GetMapping("comments/post/{postId}")
+    public ResponseEntity<List<GetCommentDto>>allCommentsByPostId(@RequestParam @Valid String email, @RequestParam String token, @PathVariable Long postId){
+        return userService.allCommentsByPostId(email,token,postId);
+    }
+    @PostMapping("comment/post/{postId}")
+    public String postComment(@RequestParam @Valid String email, @RequestParam String token, @RequestBody AddCommentDto addCommentDto, @PathVariable Long postId){
+        return userService.postComment(email,token,addCommentDto,postId);
+    }
 
 }
