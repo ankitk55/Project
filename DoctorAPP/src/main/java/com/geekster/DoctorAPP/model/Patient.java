@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 
 
 @Data
@@ -27,6 +28,7 @@ public class Patient {
     @Pattern(regexp = "^.+@(?![Hh][Oo][Ss][Pp][Aa][Dd][Mm][Ii][Nn]\\.[Cc][Oo][Mm]$).+$")
     @Column(unique = true)
     private String patientEmail;
+
     @NotBlank
     private String patientPassword;
     private Integer patientAge;

@@ -30,6 +30,7 @@ public class Appointment {
     @JoinColumn(name = "fk_patient_id")
     Patient patient;
 
+
     @ManyToOne
     @JoinColumn(name = "fk_doctor_id")
     Doctor doctor;
