@@ -7,6 +7,7 @@ import com.Ankit.InstagramBackendBasicDesign.model.dto.SignInInput;
 import com.Ankit.InstagramBackendBasicDesign.model.dto.SignUpOutput;
 import com.Ankit.InstagramBackendBasicDesign.model.dto.commentDto.AddCommentDto;
 import com.Ankit.InstagramBackendBasicDesign.model.dto.commentDto.GetCommentDto;
+import com.Ankit.InstagramBackendBasicDesign.model.dto.likeDto.GetLikeDto;
 import com.Ankit.InstagramBackendBasicDesign.model.enums.AccountType;
 import com.Ankit.InstagramBackendBasicDesign.service.UserService;
 import jakarta.validation.Valid;
@@ -99,7 +100,7 @@ public class UserController {
     public ResponseEntity<User> getProfileById(@RequestParam @Valid String email,@RequestParam String token,@PathVariable Long userId){
         return userService.getProfileById(email,token,userId);
 }
-@GetMapping("all/requests")
+@GetMapping("all/follow/requests")
     public ResponseEntity<List<User>> getAllRequests(@RequestParam @Valid String email,@RequestParam String token){
         return userService.getAllRequests(email,token);
 }
@@ -126,6 +127,18 @@ public class UserController {
     @PostMapping("comment/post/{postId}")
     public String postComment(@RequestParam @Valid String email, @RequestParam String token, @RequestBody AddCommentDto addCommentDto, @PathVariable Long postId){
         return userService.postComment(email,token,addCommentDto,postId);
+    }
+    @PostMapping("like/{postId}")
+    public String likePost(@RequestParam @Valid String email, @RequestParam String token,@PathVariable Long postId){
+        return userService.likePost(email,token,postId);
+    }
+    @DeleteMapping("unlike/{postId}")
+    public String unlikePostById(@RequestParam @Valid String email, @RequestParam String token,@PathVariable Long postId){
+        return userService.unlikePostById(email,token,postId);
+    }
+    @GetMapping("likes/{postId}")
+    public ResponseEntity<List<GetLikeDto>> getAllLikesByPostId(@RequestParam @Valid String email, @RequestParam String token, @PathVariable Long postId){
+        return userService.getAllLikesByPostId(email,token,postId);
     }
 
 }
