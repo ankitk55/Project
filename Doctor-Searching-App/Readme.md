@@ -51,6 +51,11 @@ a streamlined.
 - Email (should be a valid email address-examle@gmail.com)
 - Phone number (should be at least 10 number)
 
+## 🔯 End-Points
+![logo](https://github.com/ankitk55/git_first_repo/blob/main/Doctor-Searching-Endpoints.png)
+## ▶️ Schemas
+![logo](https://github.com/ankitk55/git_first_repo/blob/main/Doctor-Searching-Schemas.png)
+
 ## 🌟 Conclusion
 My Doctor Search App powered by Spring Boot is poised to revolutionize the way patients find and connect with healthcare providers.
 By combining advanced technology with a user-centric approach, I am helping bridge the gap between patients and doctors, ensuring that healthcare
